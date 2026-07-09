@@ -89,7 +89,7 @@ export default function TestimonialsSection() {
     <section
       id="מה אומרים האורחים שלנו"
       dir="rtl"
-      className="relative overflow-hidden bg-[#07122E] py-24"
+      className="relative flex h-[calc(100svh-70px)] scroll-mt-[70px] flex-col justify-center overflow-hidden bg-[#07122E] py-12"
     >
       {/* Giant decorative quote mark */}
       <span

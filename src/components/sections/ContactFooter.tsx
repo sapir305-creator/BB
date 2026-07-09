@@ -103,9 +103,9 @@ export default function ContactFooter() {
         id="contact"
         aria-labelledby="contact-heading"
         dir="rtl"
-        className="min-h-screen bg-white py-24"
+        className="flex min-h-[calc(100svh-70px)] scroll-mt-[70px] flex-col justify-center bg-white py-10"
       >
-        <div className="mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-2">
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-8 px-6 lg:grid-cols-2">
           {/* Info column */}
           <div>
             <motion.div
@@ -120,14 +120,14 @@ export default function ContactFooter() {
               >
                 בואו <span className="text-[#00AEEF] italic">נדבר</span>
               </h2>
-              <div className="mt-5 h-[3px] w-16 rounded bg-[#BFA26F]" />
-              <p className="mt-6 max-w-md text-lg leading-relaxed text-[#1A3A8A]">
+              <div className="mt-4 h-[3px] w-16 rounded bg-[#BFA26F]" />
+              <p className="mt-4 max-w-md text-base leading-relaxed text-[#1A3A8A]">
                 מוזמנים להשאיר פרטים ונחזור אליכם בהקדם לתיאום שהות פרטית
                 ובלתי נשכחת.
               </p>
             </motion.div>
 
-            <div className="mt-10 flex flex-col gap-7">
+            <div className="mt-6 flex flex-col gap-4">
               {CONTACT_INFO.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -166,7 +166,7 @@ export default function ContactFooter() {
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
             className="rounded-2xl bg-[#EEF2F8] p-7 shadow-sm md:p-10"
           >
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               {FIELDS.map((field) => (
                 <motion.div
                   key={field.name}
@@ -177,7 +177,7 @@ export default function ContactFooter() {
                 >
                   <label
                     htmlFor={field.name}
-                    className="mb-1.5 block text-sm font-medium text-[#0D2561]"
+                    className="mb-1 block text-sm font-medium text-[#0D2561]"
                   >
                     {field.label}
                     {field.required && <span className="text-[#00AEEF]"> *</span>}
@@ -186,12 +186,12 @@ export default function ContactFooter() {
                     <textarea
                       id={field.name}
                       name={field.name}
-                      rows={4}
+                      rows={3}
                       value={form[field.name as keyof FormState]}
                       onChange={(e) =>
                         update(field.name as keyof FormState, e.target.value)
                       }
-                      className="w-full resize-none rounded-lg border border-[#D8E2F0] bg-white px-4 py-3 text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF]"
+                      className="w-full resize-none rounded-lg border border-[#D8E2F0] bg-white px-4 py-2 text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF]"
                     />
                   ) : (
                     <input
@@ -203,7 +203,7 @@ export default function ContactFooter() {
                       onChange={(e) =>
                         update(field.name as keyof FormState, e.target.value)
                       }
-                      className="w-full rounded-lg border border-[#D8E2F0] bg-white px-4 py-3 text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF]"
+                      className="w-full rounded-lg border border-[#D8E2F0] bg-white px-4 py-2 text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF]"
                     />
                   )}
                 </motion.div>
@@ -212,7 +212,7 @@ export default function ContactFooter() {
               <button
                 type="submit"
                 disabled={sending}
-                className="btn-glow mt-2 rounded-lg bg-[#0D2561] py-3.5 text-lg font-semibold text-white transition-colors hover:bg-[#1A3A8A] disabled:opacity-50"
+                className="btn-glow mt-1 rounded-lg bg-[#0D2561] py-3 text-lg font-semibold text-white transition-colors hover:bg-[#1A3A8A] disabled:opacity-50"
               >
                 {sending ? "שולח..." : "שליחת פנייה"}
               </button>
@@ -239,7 +239,11 @@ export default function ContactFooter() {
       </section>
 
       {/* Footer */}
-      <footer id="footer" dir="rtl" className="bg-[#07122E] py-12 text-white">
+      <footer
+        id="footer"
+        dir="rtl"
+        className="scroll-mt-[70px] bg-[#07122E] py-12 text-white"
+      >
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-right">
           <div className="flex flex-col items-center gap-3 md:items-start">
             <Image

@@ -94,9 +94,9 @@ const COMPLEXES: Complex[] = [
    ──────────────────────────────────────────────────────────── */
 
 function FeatureIcon({ label }: { label: string }) {
-  const iconProps = { size: 72, strokeWidth: 1.2, color: "#BFA26F" } as const;
+  const iconProps = { size: 34, strokeWidth: 1.2, color: "#BFA26F" } as const;
   const emoji = (e: string) => (
-    <span style={{ fontSize: 56, lineHeight: 1 }} aria-hidden>
+    <span style={{ fontSize: 26, lineHeight: 1 }} aria-hidden>
       {e}
     </span>
   );
@@ -287,7 +287,11 @@ function Gallery({
   const next = () => setIndex((i) => (i + 1) % images.length);
 
   return (
-    <section id={id} className="bg-[#EEF3FA] py-20" dir="rtl">
+    <section
+      id={id}
+      dir="rtl"
+      className="scroll-mt-[70px] bg-[#EEF3FA] py-20"
+    >
       <div className="mx-auto max-w-6xl px-6">
         <FadeIn>
           <h3 className="text-center text-3xl font-semibold md:text-4xl">
@@ -352,8 +356,7 @@ function ComplexBlock({ data }: { data: Complex }) {
       <section
         id={data.id}
         ref={ref}
-        className="relative w-full overflow-hidden"
-        style={{ height: "100svh" }}
+        className="relative h-[calc(100svh-70px)] w-full overflow-hidden scroll-mt-[70px]"
       >
         {/* Background image */}
         <Image
@@ -364,25 +367,25 @@ function ComplexBlock({ data }: { data: Complex }) {
           className="object-cover"
         />
 
-        {/* Bottom gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black from-30% via-black/75 via-60% to-transparent" />
+        {/* Light gradient — keeps the photo visible, text stays legible via text-shadow */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
 
-        {/* Content */}
+        {/* Content — fits exactly one screen below the header (no inner scroll) */}
         <div
           dir="rtl"
-          className="absolute inset-0 flex flex-col justify-end px-6 pb-14 text-white md:px-16 md:pb-20"
+          className="relative z-10 flex h-full flex-col justify-center gap-2 px-6 py-5 text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.7)] md:px-16"
         >
           {/* Top bar: tag + number */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={show({ opacity: 1, y: 0 })}
             transition={{ duration: 0.6, delay: 0.05, ease: "easeOut" }}
-            className="mb-3 flex items-center gap-4"
+            className="flex items-center gap-3"
           >
-            <span className="text-3xl font-bold text-[#BFA26F] md:text-4xl">
+            <span className="text-2xl font-bold text-[#BFA26F] md:text-3xl">
               {data.number}
             </span>
-            <span className="text-sm tracking-[0.25em] text-white/85 md:text-base">
+            <span className="text-xs tracking-[0.25em] text-white/85 md:text-sm">
               {data.tag}
             </span>
           </motion.div>
@@ -393,7 +396,7 @@ function ComplexBlock({ data }: { data: Complex }) {
             animate={show({ opacity: 1, x: 0 })}
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
             className="font-bold leading-[0.95]"
-            style={{ fontSize: "clamp(42px, 8vw, 140px)" }}
+            style={{ fontSize: "clamp(26px, 5vw, 64px)" }}
           >
             {data.title}
           </motion.h2>
@@ -403,7 +406,7 @@ function ComplexBlock({ data }: { data: Complex }) {
             initial={{ scaleX: 0 }}
             animate={show({ scaleX: 1 })}
             transition={{ duration: 0.5, delay: 0.35, ease: "easeOut" }}
-            className="mt-6 origin-right bg-[#BFA26F]"
+            className="origin-right bg-[#BFA26F]"
             style={{ width: 16, height: 3 }}
           />
 
@@ -412,14 +415,14 @@ function ComplexBlock({ data }: { data: Complex }) {
             initial={{ opacity: 0, y: 24 }}
             animate={show({ opacity: 1, y: 0 })}
             transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
-            className="mt-6 max-w-4xl leading-relaxed text-white/90"
-            style={{ fontSize: "clamp(28px, 3.2vw, 40px)" }}
+            className="w-full leading-snug text-white/95 md:w-1/2"
+            style={{ fontSize: "clamp(13px, 1.5vw, 19px)" }}
           >
             {data.description}
           </motion.p>
 
           {/* Features */}
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-2.5">
             {data.features.map((f, i) => (
               <motion.div
                 key={f}
@@ -430,16 +433,17 @@ function ComplexBlock({ data }: { data: Complex }) {
                   delay: featuresBaseDelay + i * featuresStep,
                   ease: "easeOut",
                 }}
-                className="flex flex-col items-center gap-3 rounded-md p-4 text-center"
+                className="flex w-[calc(33.333%-0.7rem)] flex-col items-center gap-1 rounded-md p-2 text-center sm:w-24"
                 style={{
-                  width: 160,
-                  maxWidth: 160,
-                  background: "rgba(0,0,0,0.6)",
+                  maxWidth: 112,
+                  background: "rgba(0,0,0,0.55)",
                   border: "1px solid rgba(255,255,255,0.35)",
                 }}
               >
                 <FeatureIcon label={f} />
-                <span className="text-sm leading-tight md:text-base">{f}</span>
+                <span className="text-[clamp(10px,1vw,13px)] leading-tight">
+                  {f}
+                </span>
               </motion.div>
             ))}
           </div>
@@ -449,20 +453,20 @@ function ComplexBlock({ data }: { data: Complex }) {
             initial={{ opacity: 0, y: 24 }}
             animate={show({ opacity: 1, y: 0 })}
             transition={{ duration: 0.7, delay: priceDelay, ease: "easeOut" }}
-            className="mt-10"
+            className="mr-auto text-left"
           >
             <div
               className="font-bold text-[#BFA26F]"
-              style={{ fontSize: "clamp(36px, 5vw, 64px)" }}
+              style={{ fontSize: "clamp(20px, 3vw, 38px)" }}
             >
               {data.price}
             </div>
-            <div className="mt-3 flex flex-col gap-1">
+            <div className="mt-1 flex flex-col gap-0.5">
               {data.priceSubLines.map((line) => (
                 <span
                   key={line}
                   className="text-white/90"
-                  style={{ fontSize: "clamp(16px, 1.6vw, 22px)" }}
+                  style={{ fontSize: "clamp(11px, 1.1vw, 15px)" }}
                 >
                   {line}
                 </span>
@@ -470,10 +474,10 @@ function ComplexBlock({ data }: { data: Complex }) {
             </div>
             <a
               href="#contact"
-              className="mt-8 inline-block rounded-md bg-[#BFA26F] font-semibold text-[#0D2561] transition-colors duration-300 hover:bg-white"
+              className="mt-3 inline-block rounded-md bg-[#BFA26F] font-semibold text-[#0D2561] transition-colors duration-300 hover:bg-white"
               style={{
-                padding: "18px 56px",
-                fontSize: "clamp(26px, 2.8vw, 34px)",
+                padding: "8px 30px",
+                fontSize: "clamp(15px, 1.9vw, 22px)",
               }}
             >
               הזמן עכשיו
@@ -498,7 +502,11 @@ function ComplexBlock({ data }: { data: Complex }) {
 export default function ZimmerSection() {
   return (
     <>
-      <section id="suites" className="bg-[#EEF3FA] py-24" dir="rtl">
+      <section
+        id="suites"
+        dir="rtl"
+        className="flex h-[calc(100svh-70px)] scroll-mt-[70px] items-center justify-center bg-[#EEF3FA] py-16"
+      >
         <div className="mx-auto max-w-4xl px-6 text-center">
           <FadeIn delay={0}>
             <h2 className="text-4xl font-bold text-[#0D2561] md:text-6xl">
