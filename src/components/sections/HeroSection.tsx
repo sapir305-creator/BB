@@ -83,12 +83,22 @@ export default function HeroSection() {
         >
           <a
             href="#contact"
+            style={{
+              background: "rgba(255, 255, 255, 0.12)",
+              backdropFilter: "blur(2px)",
+              WebkitBackdropFilter: "blur(2px)",
+            }}
             className="rounded-md border border-white px-6 py-3 text-center text-[clamp(18px,4.5vw,26px)] leading-tight font-medium text-white transition-colors duration-300 hover:bg-white hover:text-[#0D2561]"
           >
             הזמן את השהות שלך
           </a>
           <a
             href="#suites"
+            style={{
+              background: "rgba(255, 255, 255, 0.12)",
+              backdropFilter: "blur(2px)",
+              WebkitBackdropFilter: "blur(2px)",
+            }}
             className="rounded-md border border-[#BFA26F] px-6 py-3 text-center text-[clamp(18px,4.5vw,26px)] leading-tight font-medium text-[#BFA26F] transition-colors duration-300 hover:bg-[#BFA26F] hover:text-[#0D2561]"
           >
             המתחמים שלנו

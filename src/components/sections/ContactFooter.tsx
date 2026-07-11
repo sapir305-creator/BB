@@ -11,11 +11,11 @@ const TEMPLATE_ID = "template_8k64sls";
 const PUBLIC_KEY = "9M6XTeBoNGFYU60Nz";
 
 const FIELDS = [
-  { name: "firstName", label: "שם פרטי", type: "text", delay: 0.55, required: true },
-  { name: "lastName", label: "שם משפחה", type: "text", delay: 0.65, required: true },
-  { name: "phone", label: "טלפון", type: "tel", delay: 0.75, required: true },
-  { name: "email", label: "אימייל", type: "email", delay: 0.85, required: true },
-  { name: "message", label: "פרטים נוספים", type: "textarea", delay: 0.97, required: false },
+  { name: "firstName", label: "שם פרטי", type: "text", delay: 0.55, required: true, half: true },
+  { name: "lastName", label: "שם משפחה", type: "text", delay: 0.65, required: true, half: true },
+  { name: "phone", label: "טלפון", type: "tel", delay: 0.75, required: true, half: false },
+  { name: "email", label: "אימייל", type: "email", delay: 0.85, required: true, half: false },
+  { name: "message", label: "פרטים נוספים", type: "textarea", delay: 0.97, required: false, half: false },
 ] as const;
 
 type FormState = {
@@ -103,31 +103,31 @@ export default function ContactFooter() {
         id="contact"
         aria-labelledby="contact-heading"
         dir="rtl"
-        className="flex min-h-[calc(100svh-70px)] scroll-mt-[70px] flex-col justify-center bg-white py-6"
+        className="flex scroll-mt-[70px] flex-col bg-white py-10 sm:py-14 lg:min-h-[calc(100svh-70px)] lg:justify-center lg:py-6"
       >
-        <div className="mx-auto grid w-full max-w-6xl items-start gap-x-10 gap-y-5 px-6 lg:grid-cols-2">
+        <div className="mx-auto grid w-full max-w-6xl items-center gap-x-10 gap-y-10 px-4 sm:px-6 lg:grid-cols-2">
           {/* Info column */}
           <div>
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
             >
               <h2
                 id="contact-heading"
-                className="text-2xl font-bold text-[#0D2561] md:text-4xl"
+                className="text-[clamp(1.75rem,5vw,2.5rem)] font-bold text-[#0D2561]"
               >
                 בואו <span className="text-[#00AEEF] italic">נדבר</span>
               </h2>
               <div className="mt-2 h-[3px] w-16 rounded bg-[#BFA26F]" />
-              <p className="mt-2 max-w-md text-sm leading-relaxed text-[#1A3A8A]">
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-[#1A3A8A] sm:text-base">
                 מוזמנים להשאיר פרטים ונחזור אליכם בהקדם לתיאום שהות פרטית
                 ובלתי נשכחת.
               </p>
             </motion.div>
 
-            <div className="mt-4 flex flex-col gap-2.5">
+            <div className="mt-6 flex flex-col gap-4 lg:mt-8">
               {CONTACT_INFO.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -137,17 +137,17 @@ export default function ContactFooter() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
                     transition={{ duration: 0.6, delay: item.delay, ease: "easeOut" }}
-                    className="flex items-start gap-4"
+                    className="flex items-start gap-3 sm:gap-4"
                   >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EEF2F8] text-[#0D2561]">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EEF2F8] text-[#0D2561] sm:h-10 sm:w-10">
                       <Icon size={18} />
                     </span>
                     <div>
-                      <h3 className="text-sm font-semibold text-[#0D2561]">
+                      <h3 className="text-sm font-semibold text-[#0D2561] sm:text-base">
                         {item.title}
                       </h3>
                       {item.lines.map((line) => (
-                        <p key={line} className="text-xs text-[#5B6B78]">
+                        <p key={line} className="text-xs text-[#5B6B78] sm:text-sm">
                           {line}
                         </p>
                       ))}
@@ -160,13 +160,16 @@ export default function ContactFooter() {
 
           {/* Form column */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="w-full max-w-sm rounded-2xl bg-[#EEF2F8] p-5 shadow-sm md:p-6 lg:justify-self-end"
+            className="w-full max-w-md justify-self-center rounded-2xl bg-[#EEF2F8] p-5 shadow-sm sm:p-6 lg:max-w-sm lg:justify-self-end"
           >
-            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+            <form
+              onSubmit={handleSubmit}
+              className="grid grid-cols-2 gap-x-3 gap-y-3"
+            >
               {FIELDS.map((field) => (
                 <motion.div
                   key={field.name}
@@ -174,10 +177,11 @@ export default function ContactFooter() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.5, delay: field.delay, ease: "easeOut" }}
+                  className={field.half ? "" : "col-span-2"}
                 >
                   <label
                     htmlFor={field.name}
-                    className="mb-0.5 block text-xs font-medium text-[#0D2561]"
+                    className="mb-1 block text-xs font-medium text-[#0D2561] sm:text-sm"
                   >
                     {field.label}
                     {field.required && <span className="text-[#00AEEF]"> *</span>}
@@ -191,7 +195,7 @@ export default function ContactFooter() {
                       onChange={(e) =>
                         update(field.name as keyof FormState, e.target.value)
                       }
-                      className="w-full resize-none rounded-lg border border-[#D8E2F0] bg-white px-3 py-1.5 text-sm text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF]"
+                      className="w-full resize-none rounded-lg border border-[#D8E2F0] bg-white px-3 py-2 text-sm text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF] sm:text-base"
                     />
                   ) : (
                     <input
@@ -203,7 +207,7 @@ export default function ContactFooter() {
                       onChange={(e) =>
                         update(field.name as keyof FormState, e.target.value)
                       }
-                      className="w-full rounded-lg border border-[#D8E2F0] bg-white px-3 py-1.5 text-sm text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF]"
+                      className="w-full rounded-lg border border-[#D8E2F0] bg-white px-3 py-2 text-sm text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF] sm:text-base"
                     />
                   )}
                 </motion.div>
@@ -212,7 +216,7 @@ export default function ContactFooter() {
               <button
                 type="submit"
                 disabled={sending}
-                className="btn-glow mt-0.5 rounded-lg bg-[#0D2561] py-2.5 text-base font-semibold text-white transition-colors hover:bg-[#1A3A8A] disabled:opacity-50"
+                className="btn-glow col-span-2 mt-1 rounded-lg bg-[#0D2561] py-3 text-base font-semibold text-white transition-colors hover:bg-[#1A3A8A] disabled:opacity-50"
               >
                 {sending ? "שולח..." : "שליחת פנייה"}
               </button>
@@ -220,7 +224,7 @@ export default function ContactFooter() {
               {sent && (
                 <p
                   role="status"
-                  className="rounded-lg bg-green-50 px-4 py-2 text-center text-sm font-medium text-green-700"
+                  className="col-span-2 rounded-lg bg-green-50 px-4 py-2 text-center text-sm font-medium text-green-700"
                 >
                   הפנייה נשלחה בהצלחה! נחזור אליך בהקדם.
                 </p>
@@ -228,7 +232,7 @@ export default function ContactFooter() {
               {error && (
                 <p
                   role="alert"
-                  className="rounded-lg bg-red-50 px-4 py-2 text-center text-sm font-medium text-red-700"
+                  className="col-span-2 rounded-lg bg-red-50 px-4 py-2 text-center text-sm font-medium text-red-700"
                 >
                   שגיאה בשליחה, אנא נסה שוב.
                 </p>
