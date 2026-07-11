@@ -103,9 +103,9 @@ export default function ContactFooter() {
         id="contact"
         aria-labelledby="contact-heading"
         dir="rtl"
-        className="flex min-h-[calc(100svh-70px)] scroll-mt-[70px] flex-col justify-center bg-white py-10"
+        className="flex min-h-[calc(100svh-70px)] scroll-mt-[70px] flex-col justify-center bg-white py-6"
       >
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-8 px-6 lg:grid-cols-2">
+        <div className="mx-auto grid w-full max-w-6xl items-start gap-x-10 gap-y-5 px-6 lg:grid-cols-2">
           {/* Info column */}
           <div>
             <motion.div
@@ -116,18 +116,18 @@ export default function ContactFooter() {
             >
               <h2
                 id="contact-heading"
-                className="text-4xl font-bold text-[#0D2561] md:text-5xl"
+                className="text-2xl font-bold text-[#0D2561] md:text-4xl"
               >
                 בואו <span className="text-[#00AEEF] italic">נדבר</span>
               </h2>
-              <div className="mt-4 h-[3px] w-16 rounded bg-[#BFA26F]" />
-              <p className="mt-4 max-w-md text-base leading-relaxed text-[#1A3A8A]">
+              <div className="mt-2 h-[3px] w-16 rounded bg-[#BFA26F]" />
+              <p className="mt-2 max-w-md text-sm leading-relaxed text-[#1A3A8A]">
                 מוזמנים להשאיר פרטים ונחזור אליכם בהקדם לתיאום שהות פרטית
                 ובלתי נשכחת.
               </p>
             </motion.div>
 
-            <div className="mt-6 flex flex-col gap-4">
+            <div className="mt-4 flex flex-col gap-2.5">
               {CONTACT_INFO.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -139,15 +139,15 @@ export default function ContactFooter() {
                     transition={{ duration: 0.6, delay: item.delay, ease: "easeOut" }}
                     className="flex items-start gap-4"
                   >
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#EEF2F8] text-[#0D2561]">
-                      <Icon size={22} />
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EEF2F8] text-[#0D2561]">
+                      <Icon size={18} />
                     </span>
                     <div>
-                      <h3 className="font-semibold text-[#0D2561]">
+                      <h3 className="text-sm font-semibold text-[#0D2561]">
                         {item.title}
                       </h3>
                       {item.lines.map((line) => (
-                        <p key={line} className="text-[#5B6B78]">
+                        <p key={line} className="text-xs text-[#5B6B78]">
                           {line}
                         </p>
                       ))}
@@ -164,9 +164,9 @@ export default function ContactFooter() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="rounded-2xl bg-[#EEF2F8] p-7 shadow-sm md:p-10"
+            className="w-full max-w-sm rounded-2xl bg-[#EEF2F8] p-5 shadow-sm md:p-6 lg:justify-self-end"
           >
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2">
               {FIELDS.map((field) => (
                 <motion.div
                   key={field.name}
@@ -177,7 +177,7 @@ export default function ContactFooter() {
                 >
                   <label
                     htmlFor={field.name}
-                    className="mb-1 block text-sm font-medium text-[#0D2561]"
+                    className="mb-0.5 block text-xs font-medium text-[#0D2561]"
                   >
                     {field.label}
                     {field.required && <span className="text-[#00AEEF]"> *</span>}
@@ -186,12 +186,12 @@ export default function ContactFooter() {
                     <textarea
                       id={field.name}
                       name={field.name}
-                      rows={3}
+                      rows={2}
                       value={form[field.name as keyof FormState]}
                       onChange={(e) =>
                         update(field.name as keyof FormState, e.target.value)
                       }
-                      className="w-full resize-none rounded-lg border border-[#D8E2F0] bg-white px-4 py-2 text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF]"
+                      className="w-full resize-none rounded-lg border border-[#D8E2F0] bg-white px-3 py-1.5 text-sm text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF]"
                     />
                   ) : (
                     <input
@@ -203,7 +203,7 @@ export default function ContactFooter() {
                       onChange={(e) =>
                         update(field.name as keyof FormState, e.target.value)
                       }
-                      className="w-full rounded-lg border border-[#D8E2F0] bg-white px-4 py-2 text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF]"
+                      className="w-full rounded-lg border border-[#D8E2F0] bg-white px-3 py-1.5 text-sm text-[#0D2561] outline-none transition-colors focus:border-[#00AEEF]"
                     />
                   )}
                 </motion.div>
@@ -212,7 +212,7 @@ export default function ContactFooter() {
               <button
                 type="submit"
                 disabled={sending}
-                className="btn-glow mt-1 rounded-lg bg-[#0D2561] py-3 text-lg font-semibold text-white transition-colors hover:bg-[#1A3A8A] disabled:opacity-50"
+                className="btn-glow mt-0.5 rounded-lg bg-[#0D2561] py-2.5 text-base font-semibold text-white transition-colors hover:bg-[#1A3A8A] disabled:opacity-50"
               >
                 {sending ? "שולח..." : "שליחת פנייה"}
               </button>
@@ -220,7 +220,7 @@ export default function ContactFooter() {
               {sent && (
                 <p
                   role="status"
-                  className="rounded-lg bg-green-50 px-4 py-3 text-center font-medium text-green-700"
+                  className="rounded-lg bg-green-50 px-4 py-2 text-center text-sm font-medium text-green-700"
                 >
                   הפנייה נשלחה בהצלחה! נחזור אליך בהקדם.
                 </p>
@@ -228,7 +228,7 @@ export default function ContactFooter() {
               {error && (
                 <p
                   role="alert"
-                  className="rounded-lg bg-red-50 px-4 py-3 text-center font-medium text-red-700"
+                  className="rounded-lg bg-red-50 px-4 py-2 text-center text-sm font-medium text-red-700"
                 >
                   שגיאה בשליחה, אנא נסה שוב.
                 </p>

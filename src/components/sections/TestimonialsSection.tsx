@@ -100,44 +100,44 @@ export default function TestimonialsSection() {
         ״
       </span>
 
-      <div className="relative mx-auto max-w-6xl px-6">
-        <h2 className="mb-4 text-center text-3xl font-bold text-white md:text-5xl">
+      <div className="relative mx-auto w-full max-w-6xl px-6">
+        <h2 className="mb-2 text-center text-2xl font-bold text-white md:text-4xl">
           מה אומרים <span className="text-[#00AEEF] italic">האורחים שלנו</span>
         </h2>
-        <div className="mx-auto mb-14 h-[3px] w-16 rounded bg-[#BFA26F]" />
+        <div className="mx-auto mb-6 h-[3px] w-16 rounded bg-[#BFA26F]" />
 
-        <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
+        <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
           {/* Left: active review */}
           <div className="flex flex-col">
-            <blockquote className="rounded-lg border-r-4 border-[#BFA26F] bg-white p-8 shadow-lg md:p-10">
+            <blockquote className="rounded-lg border-r-4 border-[#BFA26F] bg-white p-5 shadow-lg md:p-6">
               <p
-                className="min-h-[8rem] text-xl leading-relaxed text-[#0D2561] md:text-2xl"
+                className="min-h-[5rem] text-base leading-relaxed text-[#0D2561] md:text-xl"
                 lang="he"
               >
                 <TypewriterQuote key={active} text={current.quote} />
               </p>
-              <footer className="mt-6 text-lg font-semibold text-[#9C845A]">
+              <footer className="mt-3 text-base font-semibold text-[#9C845A]">
                 — {current.author}
               </footer>
             </blockquote>
 
             {/* Nav arrows + progress */}
-            <div className="mt-8 flex items-center gap-5">
+            <div className="mt-5 flex items-center gap-4">
               <button
                 type="button"
                 aria-label="ביקורת קודמת"
                 onClick={prev}
-                className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:border-[#BFA26F] hover:text-[#BFA26F]"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:border-[#BFA26F] hover:text-[#BFA26F]"
               >
-                <ChevronRight size={28} />
+                <ChevronRight size={22} />
               </button>
               <button
                 type="button"
                 aria-label="ביקורת הבאה"
                 onClick={next}
-                className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:border-[#BFA26F] hover:text-[#BFA26F]"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:border-[#BFA26F] hover:text-[#BFA26F]"
               >
-                <ChevronLeft size={28} />
+                <ChevronLeft size={22} />
               </button>
 
               <div className="flex flex-1 flex-col gap-2">
@@ -155,18 +155,18 @@ export default function TestimonialsSection() {
           </div>
 
           {/* Right: next 3 reviews */}
-          <div className="hidden flex-col gap-4 lg:flex">
+          <div className="hidden flex-col gap-3 lg:flex">
             {sideStack.map(({ idx, review }) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => setActive(idx)}
-                className="rounded-lg border border-white/10 bg-white/5 p-5 text-right transition-colors hover:border-[#BFA26F]/60 hover:bg-white/10"
+                className="rounded-lg border border-white/10 bg-white/5 p-4 text-right transition-colors hover:border-[#BFA26F]/60 hover:bg-white/10"
               >
                 <p className="line-clamp-3 text-sm leading-relaxed text-white/70">
                   {review.quote}
                 </p>
-                <span className="mt-3 block text-sm font-semibold text-[#BFA26F]">
+                <span className="mt-2 block text-sm font-semibold text-[#BFA26F]">
                   {review.author}
                 </span>
               </button>
